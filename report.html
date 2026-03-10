@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QA 테스트 수행 결과 보고서</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --border-color: #e2e8f0;
+        }
+        body { font-family: 'Pretendard', sans-serif; background-color: var(--bg-color); color: var(--text-main); line-height: 1.6; margin: 0; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        h1 { text-align: center; color: var(--primary-color); margin-bottom: 40px; }
+        h2 { border-left: 5px solid var(--primary-color); padding-left: 15px; margin-top: 50px; }
+        
+        /* 요약표 스타일 */
+        .summary-card { background: var(--card-bg); border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); padding: 25px; margin-bottom: 50px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+        th, td { padding: 15px; text-align: left; border-bottom: 1px solid var(--border-color); }
+        th { background-color: #f1f5f9; font-weight: 600; }
+        tr:hover { background-color: #f8fafc; cursor: pointer; }
+        .rank { font-weight: bold; color: var(--primary-color); }
+        .time-badge { background: #fee2e2; color: #dc2626; padding: 4px 8px; border-radius: 6px; font-size: 0.9em; font-weight: bold; }
+
+        /* 상세 리포트 카드 */
+        .tc-detail { background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color); padding: 30px; margin-bottom: 30px; }
+        .reason-box { background: #eff6ff; border-left: 4px solid #3b82f6; padding: 15px; margin-top: 20px; }
+        .actual-fail { color: #e11d48; font-weight: bold; }
+        .actual-nt { color: #a3166f; font-weight: bold; }
+        .back-to-top { display: inline-block; margin-top: 20px; color: var(--primary-color); text-decoration: none; font-size: 0.9em; }
+        .back-to-top:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🚀 최대 수행 시간 TOP 5 분석 리포트(리그레이션 테스트)</h1>
+
+    <section class="summary-card">
+        <h3>📊 최대 수행 시간 TOP 5 요약</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>순위</th>
+                    <th>TC ID</th>
+                    <th>검증 내용 요약</th>
+                    <th>수행 시간</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr onclick="location.href='#T237'">
+                    <td class="rank">1</td>
+                    <td><strong>QCP-T237</strong></td>
+                    <td>수강 기간 필터 검증</td>
+                    <td><span class="time-badge">36분 54초</span></td>
+                </tr>
+                <tr onclick="location.href='#T223'">
+                    <td class="rank">2</td>
+                    <td><strong>QCP-T223</strong></td>
+                    <td>수강 상태 필터 검증</td>
+                    <td><span class="time-badge">24분 55초</span></td>
+                </tr>
+                <tr onclick="location.href='#T6192'">
+                    <td class="rank">3</td>
+                    <td><strong>QCP-T6192</strong></td>
+                    <td>수료증 이미지 검증</td>
+                    <td><span class="time-badge">21분 06초</span></td>
+                </tr>
+                <tr onclick="location.href='#T2943'">
+                    <td class="rank">4</td>
+                    <td><strong>QCP-T2943</strong></td>
+                    <td>수료증 번호 형식 변경에 따른 계정별 수료 번호 적용 정합성 검증</td>
+                    <td><span class="time-badge">20분 57초</span></td>
+                </tr>
+                <tr onclick="location.href='#T3629'">
+                    <td class="rank">5</td>
+                    <td><strong>QCP-T3629</strong></td>
+                    <td>카테고리 삭제 시 안내 다이얼로그 노출 검증</td>
+                    <td><span class="time-badge">15분 34초</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="font-size: 0.85em; color: #64748b; margin-top: 15px;">* TC ID를 클릭하면 상세 분석 리포트로 이동합니다.</p>
+    </section>
+
+    <hr>
+
+    <h2 id="T237">QCP-T237 : 수강 기간 필터 검증</h2>
+    <div class="tc-detail">
+        <p><strong>시나리오:</strong> 다중 날짜 기준(시작일/종료일/기간 내 등) 필터링 결과 대조</p>
+        <p><strong>실제 결과:</strong> <span style="color:#16a34a">PASS</span></p>
+        <div class="reason-box">
+            <strong>⚠️ 수행 지연 사유:</strong><br>
+            1. 총 4개의 세부 날짜 옵션에 대한 개별 검증이 수행되었으며, DB의 실제 수강 데이터와 UI 리스트를 1:1로 수동 대조하는 과정에서 물리적인 시간이 소요됨.</br>
+            2. "필터 조건(시작일/종료일/기간 내 등)"에 대한 정의에 대한 설명이 없어 이해 하는데 어려움이 있었음.
+        </div>
+        <a href="#" class="back-to-top">↑ 요약표로 돌아가기</a>
+    </div>
+
+    <h2 id="T223">QCP-T223 : 수강 상태 필터 검증</h2>
+    <div class="tc-detail">
+        <p><strong>시나리오:</strong> 6가지 수강 상태 필터링 확인</p>
+        <p><strong>실제 결과:</strong> <span style="color:#16a34a">PASS (단, 테스트 과정 중 MongoDB와 SQLDB 간 동기화 지연으로 인한 데이터 누락 현상 확인 및 재검증 완료)</span></p>
+        <div class="reason-box">
+            <strong>⚠️ 수행 지연 사유:</strong><br>
+            1. 총 6개의 세부 수강 상태 옵션에 대한 개별 검증이 수행되었으며, DB의 실제 수강 데이터와 UI 리스트를 1:1로 수동 대조하는 과정에서 물리적인 시간이 소요됨.</br>
+
+            2.  테스트 중 MongoDB-SQLDB 간 동기화 지연으로 인한 데이터 누락 현상이 발견되어, 동기화 대기 및 재현 테스트를 반복함에 따라 수행 시간이 크게 증가함.
+        </div>
+        <a href="#" class="back-to-top">↑ 요약표로 돌아가기</a>
+    </div>
+
+<h2 id="T6192">QCP-T6192 : 수료증 이미지 검증</h2>
+    <div class="tc-detail">
+        <p><strong>시나리오:</strong> 수료 기준 충족 시 버튼 노출 및 수료증 이미지 출력 확인</p>
+        <p><strong>실제 결과:</strong> <span class="actual-fail">FAIL (직인 이미지 깨짐 발생)</span></p>
+        <div class="reason-box">
+            <strong>⚠️ 수행 지연 사유:</strong><br>
+            1. 수료증 버튼이 노출되기 위한 선행 조건(수강률 100%, 시험 통과 등)을 만족시키기 위한 테스트 데이터 빌드 및 상태값 변경 작업에 시간 소요.</br>
+            2. 수료증 직인 이미지가 깨져 출력되는 결함이 발견되어, 원인 파악을 위한 추가적인 테스트 과정이 포함됨.
+        </div>
+        <a href="#" class="back-to-top">↑ 요약표로 돌아가기</a>
+    </div>
+
+    <h2 id="T2943">QCP-T2943 : 수료증 번호 형식 변경에 따른 계정별 수료 번호 적용 정합성 검증</h2>
+    <div class="tc-detail">
+        <p><strong>시나리오:</strong> 수료 번호 형식 변경 시 기존/신규 발급자 데이터 영향도 평가</p>
+        <p><strong>실제 결과:</strong> <span class="actual-fail">FAIL</span></p>
+        <div class="reason-box">
+            <strong>⚠️ 수행 지연 사유:</strong><br>
+            1. 수료 번호 업데이트 정책(기존 유지 vs 전체 변경)에 대한 복합 시나리오 검증을 위해 다수의 테스트 계정 생성 및 데이터 정합성 확인이 필요했음.</br>
+2. 기발급된 수료증의 수료번호가 임의의 값으로 출력되는 현상이 발견되어, 원인 파악을 위한 추가적인 테스트 과정이 포함됨.
+        </div>
+        <a href="#" class="back-to-top">↑ 요약표로 돌아가기</a>
+    </div>
+
+    <h2 id="T3629">QCP-T3629 : 카테고리 삭제 시 안내 다이얼로그 노출 검증</h2>
+    <div class="tc-detail">
+        <p><strong>시나리오:</strong> 상품태그 연결된 카테고리 삭제 시 안내 다이얼로그 노출 여부 확인</p>
+        <p><strong>실제 결과:</strong> <span class="actual-nt">N/T (삭제된 기능, TC 최신화 안됨)</span></p>
+        <div class="reason-box">
+            <strong>⚠️ 수행 지연 사유:</strong><br>
+            1. 안내 다이얼로그 없이 카테고리가 삭제되어버리는 현상이 발견 되어, 원인 파악을 위한 추가적인 테스트 과정이 포함됨. </br>
+2. 이전 버전에서는 존재하던 다이얼로그가 최신 버전에서 미노출 되는 것인지, TC 이해도가 부족한 것인지 파악하는데 추가적인 테스트 과정이 포함됨.</br>
+
+        </div>
+        <a href="#" class="back-to-top">↑ 요약표로 돌아가기</a>
+    </div>
+</div>
+
+</body>
+</html>
